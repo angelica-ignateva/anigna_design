@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Anigna Design — Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f0f;
+      --light:#f5f3ef;
+      --muted:#aaa;
+      --gold:#bba673;
+      --gold-brush: rgba(187,166,115,0.7);
+      --border-gold: rgba(187,166,115,0.25);
+      --ease:cubic-bezier(.25,.1,.25,1);
+    }
+
+    /* GLOBAL RESET + BASE */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html, body{
+      scroll-behavior:smooth;
+      background:var(--bg);
+    }
+    body{
+      font-family:'Outfit',sans-serif;
+      color:var(--light);
+      overflow-x:hidden;
+      line-height:1.8;
+    }
+
+    /* ============ NAVBAR ============ */
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:999;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 50px;
+      transition:all .6s var(--ease);
+      background:rgba(15,15,15,.98);
+      border-bottom:1px solid rgba(187,166,115,.15);
+      backdrop-filter:blur(12px);
+      box-shadow:0 4px 24px rgba(0,0,0,.4);
+    }
+    nav img.logo{height:42px;width:auto;transition:transform .4s var(--ease);}
+    nav img.logo:hover{transform:scale(1.05);}
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      margin-left:32px;
+      font-size:13px;
+      letter-spacing:.12em;
+      position:relative;
+      transition:color .4s var(--ease);
+    }
+    nav a::after{
+      content:'';
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .4s var(--ease);
+    }
+    nav a:hover{color:var(--gold);}
+    nav a:hover::after{width:100%;}
+    nav a.logo-link::after {
+      display: none !important;
+    }
+
+
+    /* ============ INTRO ============ */
+    .intro{
+      position:relative;
+      width:100vw;
+      min-height:120vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:var(--bg);
+    }
+    .background-fade-gallery{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+      filter:brightness(0.55);
+    }
+    .background-fade-gallery::before{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:320px;
+      pointer-events:none;
+      z-index:2;
+      background:linear-gradient(
+        to bottom,
+        rgba(9,9,9,0) 0%,
+        rgba(20, 20, 20, 0.6) 45%,
+        var(--bg) 100%
+      );
+    }
+    .background-fade-gallery::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center, rgba(9,9,9,0.25) 0%, rgba(9,9,9,0.75) 90%);
+      z-index:1;
+    }
+    .background-fade-gallery img{
+      position:absolute;
+      top:110%;
+      left:50%;
+      transform:translate(-50%,-90%);
+      min-width:100%;
+      min-height:120%;
+      width:auto;
+      height:auto;
+      object-fit:cover;
+      opacity:0;
+      animation:fadeImages 36s infinite;
+      z-index:0;
+    }
+    .background-fade-gallery img:nth-child(1){animation-delay:0s;}
+    .background-fade-gallery img:nth-child(2){animation-delay:6s;}
+    .background-fade-gallery img:nth-child(3){animation-delay:12s;}
+    .background-fade-gallery img:nth-child(4){animation-delay:18s;}
+    .background-fade-gallery img:nth-child(5){animation-delay:24s;}
+    .background-fade-gallery img:nth-child(6){animation-delay:30s;}
+
+    @keyframes fadeImages{
+      0%,100%{opacity:0;}
+      10%,30%{opacity:1;}
+    }
+
+    .intro-content{
+      position:relative;
+      z-index:3;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:60px 20px;
+    }
+    .intro-content img{width:min(420px,80vw);}
+    .intro-content .tagline{
+      font-size:13px;
+      letter-spacing:.15em;
+      color:var(--muted);
+      margin-top:18px;
+      text-transform:uppercase;
+      opacity:.9;
+    }
+    .intro-content .quote{
+      font-family:'Playfair Display',serif;
+      font-size:26px;
+      margin-top:20px;
+      color:var(--light);
+    }
+    .intro-fade {
+      height: 125px;
+      width: 100%;
+      background: linear-gradient(to bottom, #080808 20%, #0f0f0f 100%);
+    }
+
+    .scroll-link{
+      color:var(--gold);
+      text-decoration:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      opacity:.8;
+    }
+    .scroll-link:hover{opacity:.85;}
+    .scroll-chevron{
+      width:12px;
+      height:12px;
+      border-right:2px solid var(--gold);
+      border-bottom:2px solid var(--gold);
+      transform:rotate(45deg);
+      margin-top:8px;
+      animation:bounce 1.8s infinite;
+    }
+    @keyframes bounce{
+      0%,100%{transform:translateY(0) rotate(45deg);}
+      50%{transform:translateY(6px) rotate(45deg);}
+    }
+
+    /* ============ SECTION BACKGROUND ============ */
+    .panel {
+      position: relative;
+      background:var(--bg);
+      overflow: hidden;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 50px 24px;
+      position: relative;
+      z-index: 1;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    /* ============ SEPARATOR ============ */
+    .separator{
+      width:800px;
+      height:1px;
+      margin:100px auto;
+      border-radius:1px;
+      box-shadow:0 0 10px rgba(187,166,115,0.25), 0 0 24px rgba(187,166,115,0.12);
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity 1.2s var(--ease), transform 1.2s var(--ease);
+      position:relative;
+      background: linear-gradient(90deg, transparent, rgba(187,166,115,0.7), transparent);
+    }
+    .separator.visible{opacity:1;transform:translateY(0);}
+    .separator::after{
+      content:"";
+      position:absolute;
+      left:0;
+      top:-2px;
+      height:5px;
+      width:100%;
+      background:linear-gradient(90deg, transparent, rgba(187,166,115,0.5), transparent);
+      filter:blur(6px);
+      opacity:.6;
+      animation:pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{opacity:.25;}
+      50%{opacity:.7;}
+    }
+
+    /* ============ PROJECTS GRID ============ */
+    #projects.portfolio{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:0;
+      width:100vw;
+      position:relative;
+      z-index:1;
+    }
+    @media(max-width:1024px){
+      #projects.portfolio{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:700px){
+      #projects.portfolio{grid-template-columns:1fr;}
+    }
+    .portfolio-item{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;}
+    .portfolio-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 1.2s var(--ease), filter 1.2s var(--ease);
+      filter:brightness(.85);
+    }
+    .portfolio-item:hover img{
+      transform:scale(1.04);
+      filter:brightness(1);
+    }
+    .portfolio-item .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:30px;
+      background:linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0));
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .6s var(--ease), transform .6s var(--ease);
+    }
+    .portfolio-item:hover .overlay{opacity:1;transform:translateY(0);}
+    .overlay h3{
+      font-family:'Playfair Display',serif;
+      font-size:22px;
+      color:var(--light);
+      margin:0;
+    }
+    .overlay .meta{
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    /* Extra projects (10, 11, 12) hidden by default */
+    #projects .portfolio-item.extra-project{
+      display:none;
+    }
+    #projects.expanded .portfolio-item.extra-project{
+      display:block;
+    }
+
+    /* ============ SHOW MORE PROJECTS ============ */
+    .more-projects-wrapper{
+      background: var(--bg);
+    }
+    .more-projects-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      text-align: center;
+    }
+
+    /* ============ CONTENT SECTIONS ============ */
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:32px;
+      color:var(--gold);
+      margin:0 auto 18px;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      text-align:center;
+    }
+    @media(max-width:600px){
+      .section-title{
+        font-size:26px;
+        letter-spacing:0.12em;
+      }
+    }
+    .section-sub{
+      color:var(--muted);
+      max-width:800px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .center{text-align:center;}
+
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap:48px;
+      align-items:center;
+      margin-top:60px;
+    }
+    @media(max-width:1000px){.about-grid{grid-template-columns:1fr;}}
+    .about-photo{
+      width: 75%;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition:box-shadow .8s var(--ease), transform .8s var(--ease);
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .about-photo img {
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      object-position:center center;
+    }
+    .about-photo:hover{
+      transform:translateY(-4px);
+      box-shadow: 0 18px 60px rgba(187,166,115,0.15);
+    }
+    .about-copy p{color:var(--muted);margin-bottom:16px;}
+    .editorial-about {
+      max-width: 520px;
+      padding-right: 20px;
+      line-height: 1.85;
+    }
+    .editorial-about p {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 1.02em;
+    }
+    @media(min-width:1200px) {.editorial-about { padding-right: 40px; }}
+    @media(max-width:900px) {.editorial-about { padding-right: 0; max-width: 100%; }}
+
+    /* ============ SERVICES ============ */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+      margin-top:36px;
+    }
+    @media(max-width:1000px){.cards{grid-template-columns:1fr 1fr;}}
+    @media(max-width:700px){.cards{grid-template-columns:1fr;}}
+    .card{
+      background:#121212;
+      border:1px solid var(--border-gold);
+      border-radius:14px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      transition:transform .6s var(--ease), box-shadow .6s var(--ease), border-color .6s var(--ease), background .6s var(--ease);
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(187,166,115,.35);
+      box-shadow:0 26px 60px rgba(0,0,0,.28);
+      background:#141414;
+    }
+    .card .num{
+      font-family:'Playfair Display',serif;
+      font-size:14px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:rgba(187,166,115,.65);
+      margin-bottom:10px;
+    }
+    .card h3{
+      font-family:'Playfair Display',serif;
+      color:#fff;
+      font-size:20px;
+      margin-bottom:6px;
+    }
+    .card .meta-line{
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+      margin-bottom:10px;
+    }
+    .card p{
+      color:var(--muted);
+      font-size:0.96em;
+      line-height:1.7;
+    }
+    .service-icon{
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      border:1px solid rgba(187,166,115,0.4);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:14px;
+      color:var(--gold);
+    }
+    .service-icon svg{
+      width:22px;
+      height:22px;
+      display:block;
+    }
+
+    /* ============ PROCESS (SUMMARY CARDS) ============ */
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+      margin-top:36px;
+    }
+    @media(max-width:1000px){.steps{grid-template-columns:1fr 1fr;}}
+    @media(max-width:700px){.steps{grid-template-columns:1fr;}}
+
+    .step{
+      background:#111;
+      border:1px solid var(--border-gold);
+      border-radius:14px;
+      padding:28px;
+      transition:transform .6s var(--ease), border-color .6s var(--ease), box-shadow .6s var(--ease), background .6s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .step::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top left, rgba(187,166,115,0.12), transparent 55%);
+      opacity:0;
+      transition:opacity .6s var(--ease);
+      pointer-events:none;
+    }
+    .step:hover{
+      transform:translateY(-6px);
+      border-color:rgba(187,166,115,.35);
+      box-shadow:0 26px 60px rgba(0,0,0,.28);
+      background:#131313;
+    }
+    .step:hover::before{opacity:1;}
+
+    .step .num{
+      font-family:'Playfair Display',serif;
+      font-size:42px;
+      color:rgba(187,166,115,.45);
+      margin-bottom:10px;
+    }
+    .step h4{
+      font-family:'Playfair Display',serif;
+      color:#fff;
+      font-size:20px;
+      margin-bottom:8px;
+    }
+    .step-intro{
+      color:var(--muted);
+      margin-bottom:10px;
+      font-size:0.96em;
+    }
+    .step-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      font-size:0.92em;
+      color:var(--muted);
+    }
+    .step-list li{
+      position:relative;
+      padding-left:16px;
+      margin-bottom:6px;
+    }
+    .step-list li::before{
+      content:"•";
+      position:absolute;
+      left:0;
+      top:0;
+      color:var(--gold);
+      font-size:0.78em;
+      transform:translateY(3px);
+    }
+
+    /* ============ PROCESS (INTERACTIVE DETAIL) ============ */
+    .process-layout{
+      margin-top:40px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.6fr);
+      gap:40px;
+      align-items:flex-start;
+    }
+    @media(max-width:900px){
+      .process-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .process-steps-column{
+      position:relative;
+    }
+    .process-label{
+      font-size:11px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+      margin-bottom:6px;
+      text-align:left;
+    }
+    .process-headline{
+      font-family:'Playfair Display',serif;
+      font-size:22px;
+      margin-bottom:10px;
+      color:#fff;
+      text-align:left;
+    }
+    .process-copy{
+      font-size:0.96em;
+      color:var(--muted);
+      max-width:360px;
+      text-align:left;
+    }
+
+    .process-step-chips{
+      margin-top:22px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .process-step-chip{
+      border-radius:999px;
+      border:1px solid rgba(187,166,115,0.25);
+      background:rgba(10,10,10,0.9);
+      padding:9px 16px;
+      font-size:11px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      text-align:left;
+      color:rgba(255,255,255,0.72);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      transition:background .4s var(--ease), border-color .4s var(--ease), transform .3s var(--ease), color .3s var(--ease), box-shadow .4s var(--ease);
+    }
+    .process-step-chip span{
+      opacity:0.75;
+    }
+    .process-step-chip-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      border:1px solid rgba(187,166,115,0.6);
+      background:transparent;
+      flex-shrink:0;
+      margin-left:12px;
+      transition:background .4s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+    }
+    .process-step-chip:hover{
+      transform:translateY(-1px);
+      border-color:rgba(187,166,115,0.6);
+      box-shadow:0 12px 28px rgba(0,0,0,0.4);
+      color:#fff;
+    }
+    .process-step-chip.active{
+      background:linear-gradient(120deg, rgba(187,166,115,0.28), rgba(30,30,30,0.9));
+      color:#fff;
+      border-color:rgba(187,166,115,0.95);
+      box-shadow:0 16px 40px rgba(0,0,0,0.65);
+    }
+    .process-step-chip.active .process-step-chip-dot{
+      background:var(--gold);
+      border-color:rgba(0,0,0,0.7);
+      transform:scale(1.1);
+      box-shadow:0 0 0 4px rgba(187,166,115,0.25);
+    }
+
+    .process-tip{
+      font-size:11px;
+      color:rgba(255,255,255,0.5);
+      margin-top:14px;
+      text-align:left;
+    }
+
+    .process-progress{
+      margin-top:22px;
+      width:100%;
+      height:3px;
+      border-radius:999px;
+      background:radial-gradient(circle at 0% 50%, rgba(187,166,115,0.4), transparent 60%);
+      position:relative;
+      overflow:hidden;
+    }
+    .process-progress-fill{
+      position:absolute;
+      inset:0;
+      width:0;
+      background:linear-gradient(90deg, rgba(187,166,115,0.9), rgba(255,255,255,0.8));
+      box-shadow:0 0 18px rgba(187,166,115,0.7);
+      transition:width .6s var(--ease);
+    }
+
+    .process-detail-column{
+      background:radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,1) 60%);
+      border-radius:18px;
+      border:1px solid rgba(187,166,115,0.28);
+      padding:24px 24px 26px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.9);
+      position:relative;
+      overflow:hidden;
+    }
+    .process-detail-column::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:radial-gradient(circle at top right, rgba(187,166,115,0.16), transparent 55%);
+      opacity:0.5;
+      pointer-events:none;
+    }
+    .process-detail-inner{
+      position:relative;
+      z-index:1;
+    }
+
+    .process-detail-tag{
+      font-size:11px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.6);
+      margin-bottom:6px;
+    }
+    .process-detail-title{
+      font-family:'Playfair Display',serif;
+      font-size:20px;
+      margin-bottom:10px;
+      color:#fff;
+    }
+    .process-detail-kicker{
+      font-size:0.95em;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    .process-detail-grid{
+      display:grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap:18px;
+    }
+    @media(max-width:700px){
+      .process-detail-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .process-detail-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      font-size:0.93em;
+      color:var(--muted);
+    }
+    .process-detail-list li{
+      position:relative;
+      padding-left:18px;
+      margin-bottom:8px;
+    }
+    .process-detail-list li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:9px;
+      width:8px;
+      height:1px;
+      background:rgba(187,166,115,0.7);
+    }
+
+    .process-meta-block{
+      font-size:0.88em;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(5,5,5,0.85);
+      margin-bottom:10px;
+    }
+    .process-meta-label{
+      font-size:0.75em;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.6);
+      margin-bottom:4px;
+    }
+    .process-meta-value{
+      color:#f5f3ef;
+    }
+
+    .process-detail-panel{
+      display:none;
+      animation:fadeProcess .45s var(--ease);
+    }
+    .process-detail-panel.active{
+      display:block;
+    }
+
+    @keyframes fadeProcess{
+      from{opacity:0;transform:translateY(6px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    /* ============ FAQ ============ */
+    .faq-list{
+      max-width:800px;
+      margin:32px auto 0;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+    .faq-item{
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      padding:14px 0;
+    }
+    .faq-question{
+      width:100%;
+      background:none;
+      border:none;
+      padding:6px 0;
+      font:inherit;
+      color:#f5f3ef;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      text-align:left;
+      cursor:pointer;
+    }
+    .faq-question span:first-child{
+      font-size:0.98em;
+    }
+    .faq-toggle{
+      font-size:18px;
+      line-height:1;
+      margin-left:12px;
+      color:var(--gold);
+      transition:transform .3s var(--ease);
+    }
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height .4s var(--ease), opacity .3s var(--ease), padding-top .3s var(--ease);
+      padding-top:0;
+      font-size:0.92em;
+      color:var(--muted);
+    }
+    .faq-answer p{
+      margin-bottom:8px;
+    }
+    .faq-item.open .faq-answer{
+      max-height:500px;
+      opacity:1;
+      padding-top:8px;
+    }
+    .faq-item.open .faq-toggle{
+      transform:rotate(45deg);
+    }
+
+    /* ============ CONTACT WITH FORM ============ */
+    .contact-card{
+      max-width:900px;
+      margin:0 auto;
+      background:#101010;
+      border:1px solid var(--border-gold);
+      border-radius:16px;
+      padding:40px 30px 40px;
+      text-align:left;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 0 24px rgba(255,255,255,0.05);
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,1.25fr);
+      gap:28px;
+      align-items:flex-start;
+    }
+    @media(max-width:800px){
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .contact-intro h3{
+      font-family:'Playfair Display',serif;
+      color:#fff;
+      font-size:26px;
+      margin-bottom:10px;
+    }
+    .contact-intro p{
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .contact-details{
+      font-size:0.95em;
+      color:#ddd;
+      line-height:1.7;
+    }
+    .contact-details span.label{
+      color:#ccc;
+      display:inline-block;
+      min-width:70px;
+    }
+    .contact-details a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+    .contact-details a:hover{
+      text-decoration:underline;
+    }
+
+    .contact-form{
+      width:100%;
+    }
+    .form-row{
+      display:flex;
+      gap:14px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .form-field{
+      flex:1;
+      min-width:120px;
+    }
+    .form-field-full{
+      width:100%;
+      margin-bottom:14px;
+    }
+    .form-field label{
+      display:block;
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.65);
+      margin-bottom:6px;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(187,166,115,0.35);
+      background:#050505;
+      color:var(--light);
+      font-family:'Outfit',sans-serif;
+      font-size:0.95em;
+      outline:none;
+      transition:border-color .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+    }
+    .form-field textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder{
+      color:rgba(255,255,255,0.32);
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus{
+      border-color:var(--gold);
+      box-shadow:0 0 0 1px rgba(187,166,115,0.35), 0 0 20px rgba(0,0,0,0.8);
+      background:#090909;
+    }
+
+    .contact-form-note{
+      font-size:0.8em;
+      color:rgba(255,255,255,0.55);
+      margin-top:6px;
+    }
+
+    .contact-form-note a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+    .contact-form-note a:hover{
+      text-decoration:underline;
+    }
+
+    .cta{
+      display:inline-block;
+      margin-top:8px;
+      padding:14px 22px;
+      border-radius:12px;
+      border:1px solid var(--gold);
+      color:#fff;
+      text-decoration:none;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      transition:background .5s var(--ease), transform .4s var(--ease), box-shadow .5s var(--ease);
+      background:transparent;
+      cursor:pointer;
+    }
+    .cta:hover{
+      background:rgba(187,166,115,0.08);
+      transform:translateY(-2px);
+      box-shadow:0 16px 36px rgba(187,166,115,0.12);
+    }
+
+    .contact-form-status{
+      margin-top:10px;
+      font-size:0.9em;
+      min-height:1.2em;
+      color:var(--muted);
+    }
+    .contact-form-status.success{
+      color:var(--gold);
+    }
+    .contact-form-status.error{
+      color:#ff6b6b;
+    }
+
+    .contact-checkbox{
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      font-size:0.83em;
+      color:rgba(255,255,255,0.65);
+      margin-top:4px;
+    }
+    .contact-checkbox input{
+      margin-top:3px;
+      width:auto;
+    }
+
+    .mt-8{margin-top:8px;}
+    .mt-16{margin-top:16px;}
+    .mt-24{margin-top:24px;}
+    .mt-36{margin-top:36px;}
+    .mt-60{margin-top:60px;}
+
+    /* ============ MODAL (POPUP) ============ */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .35s var(--ease);
+    }
+    .modal-overlay.visible{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.7);
+      backdrop-filter:blur(6px);
+    }
+    .modal-dialog{
+      position:relative;
+      background:#050505;
+      border-radius:18px;
+      border:1px solid var(--border-gold);
+      max-width:1150px;
+      width:92vw;
+      max-height:92vh;
+      box-shadow:0 32px 120px rgba(0,0,0,0.9);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      z-index:1;
+    }
+    .modal-header{
+      padding:14px 20px 10px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .modal-title{
+      font-size:13px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+    .modal-sub{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+    .modal-close{
+      border:none;
+      background:transparent;
+      color:#ddd;
+      font-size:20px;
+      line-height:1;
+      cursor:pointer;
+      padding:4px 6px;
+    }
+    .modal-body{
+      padding:14px 18px 18px;
+      overflow:auto;
+    }
+    .modal-section{display:none;}
+    .modal-section.active{display:block;}
+    .modal-embed-frame iframe{
+      width:100%;
+      height:70vh;
+      border:0;
+      background:#111;
+    }
+
+    .modal-video-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    @media(min-width:900px){
+      .modal-video-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .modal-video-grid > .video-card:last-child{
+        grid-column:1 / -1;
+      }
+    }
+    .video-card{
+      background:#0d0d0d;
+      border-radius:12px;
+      border:1px solid rgba(187,166,115,0.22);
+      padding:12px 12px 14px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.5);
+    }
+    .video-card h3{
+      font-size:12px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+      color:var(--gold);
+    }
+    .video-card p{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    .video-card video{
+      width:100%;
+      border-radius:8px;
+      background:#000;
+    }
+
+    .modal-link{
+      background:none;
+      border:none;
+      padding:0;
+      font:inherit;
+      color:var(--gold);
+      cursor:pointer;
+      text-decoration:none;
+    }
+    .modal-link:hover{
+      text-decoration:underline;
+    }
+
+    .fade-up{
+      opacity:0;
+      transform:translateY(40px);
+      transition:opacity 1s var(--ease), transform 1s var(--ease);
+    }
+    .fade-up.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+    section[id] {
+      scroll-margin-top: 100px;
+    }
+
+    /* ============ LEGAL TEXT (USED IN MODAL ONLY) ============ */
+    .legal-block-title{
+      font-family:'Playfair Display',serif;
+      font-size:20px;
+      margin-bottom:8px;
+      color:#f5f3ef;
+    }
+    .legal-updated{
+      font-size:0.8em;
+      color:rgba(255,255,255,0.6);
+      margin-bottom:10px;
+    }
+    .legal-text{
+      font-size:0.9em;
+      color:var(--muted);
+    }
+    .legal-text p{
+      margin-bottom:10px;
+    }
+    .legal-text h4{
+      font-size:0.9em;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      margin:18px 0 6px;
+      color:rgba(245,243,239,0.9);
+    }
+    .legal-text ul{
+      margin:0 0 10px 18px;
+      padding:0;
+      font-size:0.9em;
+    }
+    .legal-text li{
+      margin-bottom:6px;
+    }
+
+    /* ============ FOOTER ============ */
+    .site-footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding:26px 24px 34px;
+      background:var(--bg);
+      font-size:0.78em;
+      color:var(--muted);
+    }
+    .site-footer-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .site-footer-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .site-footer a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+    .site-footer a:hover{
+      text-decoration:underline;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .social-links a {
+      color: var(--gold);
+      opacity: 0.8;
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+
+    .social-links a:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .social-links svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#intro" class="logo-link">
+      <img src="./img/logo-horizontal.png" class="logo" alt="Anigna Design Logo">
+    </a>
+    <div>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- INTRO -->
+  <section id="intro" class="intro">
+    <div class="background-fade-gallery">
+      <img src="./img/project1/01.jpg" alt="">
+      <img src="./img/project2/L03.jpg" alt="">
+      <img src="./img/project3/01.jpg" alt="">
+      <img src="./img/project1/03.jpg" alt="">
+      <img src="./img/project2/L01.jpg" alt="">
+      <img src="./img/project3/02.jpg" alt="">
+    </div>
+    <div class="intro-content">
+      <img src="./img/logo.png" alt="Anigna Design Logo">
+      <div class="tagline">Refined Architecture & Interiors</div>
+      <div class="quote">Designing timeless spaces that breathe.</div>
+      <div class="scroll-hint">
+        <a href="#projects" class="scroll-link">
+          Scroll to Explore
+          <div class="scroll-chevron"></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="intro-fade"></div>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- Projects Label -->
+  <section id="projects-label" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">Projects</h2>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="portfolio panel">
+    <div class="portfolio-item fade-up" data-project="project1">
+      <img src="./img/project1/01.jpg" alt="">
+      <div class="overlay">
+        <h3>Dark Chocolate Apartment</h3>
+        <div class="meta">Interior · 2025</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project2">
+      <img src="./img/project2/L01.jpg" alt="">
+      <div class="overlay">
+        <h3>Minimal Living</h3>
+        <div class="meta">Interior · 2025</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project3">
+      <img src="./img/project3/01.jpg" alt="">
+      <div class="overlay">
+        <h3>Japanese Harmony</h3>
+        <div class="meta">Residential · 2025</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project4">
+      <img src="./img/project4/01.jpg" alt="">
+      <div class="overlay">
+        <h3>French Studio</h3>
+        <div class="meta">Interior · 2024</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project5">
+      <img src="./img/project5/02.jpg" alt="">
+      <div class="overlay">
+        <h3>Winter House</h3>
+        <div class="meta">Residential · 2024</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project6">
+      <img src="./img/project6/01.jpg" alt="">
+      <div class="overlay">
+        <h3>Authentic Townhouse</h3>
+        <div class="meta">Residential · 2023</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project7">
+      <img src="./img/project7/01.jpg" alt="">
+      <div class="overlay">
+        <h3>Desert Penthouse</h3>
+        <div class="meta">Interior · 2023</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project8">
+      <img src="./img/project8/01.jpg" alt="">
+      <div class="overlay">
+        <h3>Villa Serenity</h3>
+        <div class="meta">Residential · 2023</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up" data-project="project9">
+      <img src="./img/project9/E01.png" alt="">
+      <div class="overlay">
+        <h3>Villa Vibrance</h3>
+        <div class="meta">Residential · 2023</div>
+      </div>
+    </div>
+
+    <!-- EXTRA PROJECTS (10, 11, 12) - HIDDEN BY DEFAULT -->
+    <div class="portfolio-item fade-up extra-project" data-project="project10">
+      <img src="./img/project10/08.jpg" alt="">
+      <div class="overlay">
+        <h3>Villa Silence</h3>
+        <div class="meta">Residential · 2023</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up extra-project" data-project="project11">
+      <img src="./img/project11/01.png" alt="">
+      <div class="overlay">
+        <h3>Eco Modular</h3>
+        <div class="meta">Architecture · 2024</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item fade-up extra-project" data-project="project12">
+      <img src="./img/project12/01.png" alt="">
+      <div class="overlay">
+        <h3>Shadow Dome</h3>
+        <div class="meta">Architecture · 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOW MORE PROJECTS BUTTON -->
+  <section class="more-projects-wrapper">
+    <div class="more-projects-inner">
+      <button class="cta" id="show-more-projects-btn">
+        Show more projects
+      </button>
+    </div>
+  </section>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="./img/about.jpg" alt="Anigna Design Studio">
+        </div>
+        <div class="about-copy editorial-about">
+          <p>
+            Hey! I'm Angelica, a freelancer specializing in modern and soft-minimalist architecture & interior design.
+          </p>
+          <p>
+            I hold a degree in Physics from Lomonosov Moscow State University and a Master’s in Architecture from the Institute for Advanced Architecture of Catalonia in Barcelona.
+          </p>
+          <p>
+            This multidisciplinary background allows me to approach each project with both creative vision and analytical precision.
+          </p>
+          <p>
+            My work is guided by the pursuit of balance—between form and function, aesthetics and comfort. 
+          <p>
+            Based in Dubai (UAE) & Marbella (Spain), I develop curated spatial layouts, refined 3D visualizations, and tangible interiors that embody harmony, timelessness, and a sense of calm. Each project is an opportunity to enhance the quality of everyday living by thoughtfully designed space.
+          </p>
+          </p>
+          <p>
+            So, let's make this world a better place together.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- SERVICES -->
+  <section id="services" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">Services</h2>
+      <p class="section-sub">
+        From concept to realization, I offer a holistic design process that unifies architecture, interiors, and visualization into one calm, coherent experience.
+      </p>
+
+      <div class="cards mt-36">
+        <!-- 01 -->
+        <div class="card">
+          <div class="num">01</div>
+          <div class="service-icon">
+            <!-- House icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 14L16 6L26 14V25H18V19H14V25H6V14Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Residential Architecture</h3>
+          <div class="meta-line">Homes · Villas · Extensions</div>
+          <p>
+            Thoughtful homes designed around daily rituals, natural light and context—bringing clarity to circulation, proportion, and the relationship between inside and outside.
+          </p>
+        </div>
+
+        <!-- 02 -->
+        <div class="card">
+          <div class="num">02</div>
+          <div class="service-icon">
+            <!-- Interior icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="8" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 24V16H20V24" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Interior Design</h3>
+          <div class="meta-line">Apartments · Houses · Studios</div>
+          <p>
+            Soft-minimal interiors with a warm material palette, custom joinery and layered lighting— created to feel calm, functional and quietly luxurious.
+          </p>
+        </div>
+
+        <!-- 03 -->
+        <div class="card">
+          <div class="num">03</div>
+          <div class="service-icon">
+            <!-- 3D cube icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 5L24 9V17L16 21L8 17V9L16 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M16 13L24 9" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 13L8 9" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3>3D Visualization</h3>
+          <div class="meta-line">Renders · Still Images</div>
+          <p>
+            Photorealistic 3D images that communicate mood, materials and light — ideal for concept, design decision-making and material selection ideas.
+          </p>
+        </div>
+
+        <!-- 04 -->
+        <div class="card">
+          <div class="num">04</div>
+          <div class="service-icon">
+            <!-- Blueprint / drawing icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="6" width="18" height="20" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M11 11H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M11 15H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M11 19H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Detailed Architectural Drawings</h3>
+          <div class="meta-line">Plans · Sections · Details</div>
+          <p>
+            Precise, construction-ready drawings that translate the design into buildable reality: floor plans, sections, elevations, and key junction details prepared for contractors and consultants.
+          </p>
+          <p style="margin-top:10px; font-size:0.9em;">
+            <button class="modal-link" data-modal="drawings">
+              Open sample drawings (PDF) ↗
+            </button>
+          </p>
+        </div>
+
+        <!-- 05 -->
+        <div class="card">
+          <div class="num">05</div>
+          <div class="service-icon">
+            <!-- Screen / play icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="7" width="22" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M15 12L19 14.5L15 17V12Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M11 24H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Interactive 3D Walkthroughs</h3>
+          <div class="meta-line">Virtual Tours · Web</div>
+          <p>
+            Immersive 360° experiences that let clients explore a space before it’s built—ideal for presentations, remote reviews and marketing.
+          </p>
+          <p style="margin-top:10px; font-size:0.9em;">
+            <button class="modal-link" data-modal="walkthrough">
+              Open example walkthrough ↗
+            </button>
+          </p>
+        </div>
+
+        <!-- 06 -->
+        <div class="card">
+          <div class="num">09</div>
+          <div class="service-icon">
+            <!-- Film / timeline icon -->
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="9" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 9V23M20 9V23" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 12H10M8 16H10M8 20H10M22 12H24M22 16H24M22 20H24" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Animation & Motion Video</h3>
+          <div class="meta-line">Cinematic Fly-throughs · Reels</div>
+          <p>
+            Short-form and long-form animation that bring your projects to life: cinematic fly-throughs, social media reels and subtle motion pieces that communicate atmosphere and story.
+          </p>
+          <p style="margin-top:10px; font-size:0.9em;">
+            <button class="modal-link" data-modal="videos">
+              View sample animation videos ↗
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- PROCESS -->
+  <section id="process" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">Process</h2>
+      <p class="section-sub">
+        A clear sequence—grounded in discovery, refined through design, realized with care. Each phase has its own rhythm, deliverables and decisions.
+      </p>
+
+      <div class="process-layout">
+        <div class="process-steps-column">
+          <div class="process-label">For every project</div>
+          <div class="process-headline">From first conversation to handover.</div>
+          <p class="process-copy">
+            Hover or tap a stage to see exactly what you receive, how long it usually takes, and how we collaborate.
+          </p>
+
+          <div class="process-step-chips">
+            <button class="process-step-chip active" data-step="concept">
+              <span>01 · Concept & Discovery</span>
+              <span class="process-step-chip-dot"></span>
+            </button>
+            <button class="process-step-chip" data-step="design">
+              <span>02 · Design Development</span>
+              <span class="process-step-chip-dot"></span>
+            </button>
+            <button class="process-step-chip" data-step="realization">
+              <span>03 · Realization & Support</span>
+              <span class="process-step-chip-dot"></span>
+            </button>
+          </div>
+
+          <div class="process-tip">
+            Tip: we can compress or expand each stage depending on the project scale and your timeline.
+          </div>
+
+          <div class="process-progress">
+            <div class="process-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="process-detail-column">
+          <div class="process-detail-inner">
+            <div class="process-detail-panel active" data-step-detail="concept">
+              <div class="process-detail-tag">Stage 01</div>
+              <div class="process-detail-title">Concept & Discovery</div>
+              <div class="process-detail-kicker">
+                We begin by understanding your life, brand or project story—then crystallize it into a spatial concept.
+              </div>
+
+              <div class="process-detail-grid">
+                <div>
+                  <ul class="process-detail-list">
+                    <li>Kick-off meeting (online or in-person) to review goals, budget and timeline.</li>
+                    <li>Site / apartment study: orientation, light, constraints and opportunities.</li>
+                    <li>Functional diagrams and first zoning of spaces.</li>
+                    <li>Concept development and visual benchmarks to align taste and atmosphere.</li>
+                    <li>Preliminary layout options, with pros & cons of each scenario.</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">You receive</div>
+                    <div class="process-meta-value">
+                      Concept deck (PDF), moodboard, 1–2 layout options with notes.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Typical duration</div>
+                    <div class="process-meta-value">
+                      ~1–2 weeks from first briefing, depending on project size.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Collaboration</div>
+                    <div class="process-meta-value">
+                      Online calls, shared reference boards, comments directly on layouts.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="process-detail-panel" data-step-detail="design">
+              <div class="process-detail-tag">Stage 02</div>
+              <div class="process-detail-title">Design Development</div>
+              <div class="process-detail-kicker">
+                We deepen the concept into architecture and interiors: plans, materials, lighting and joinery form one coherent language.
+              </div>
+
+              <div class="process-detail-grid">
+                <div>
+                  <ul class="process-detail-list">
+                    <li>Refined floor plans with furniture, circulation and storage.</li>
+                    <li>Key elevations and sections for important walls and volumes.</li>
+                    <li>Material & finishes palette: floors, walls, ceilings, textiles.</li>
+                    <li>Lighting plan: general, accent and decorative fixtures.</li>
+                    <li>3D views and visualizations to validate mood and proportions.</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">You receive</div>
+                    <div class="process-meta-value">
+                      Updated layouts, elevations, 3D previews, material palette and a structured feedback round.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Typical duration</div>
+                    <div class="process-meta-value">
+                      ~2–4 weeks with intermediate check-ins for comments.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Collaboration</div>
+                    <div class="process-meta-value">
+                      Iterative reviews, screen-share sessions, adjustments based on your feedback.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="process-detail-panel" data-step-detail="realization">
+              <div class="process-detail-tag">Stage 03</div>
+              <div class="process-detail-title">Realization & Support</div>
+              <div class="process-detail-kicker">
+                We translate the design into precise documentation and support you and your team during execution.
+              </div>
+
+              <div class="process-detail-grid">
+                <div>
+                  <ul class="process-detail-list">
+                    <li>Technical drawings: plans, sections, elevations and details.</li>
+                    <li>Detailed drawings for custom joinery and built-in furniture.</li>
+                    <li>Recommendations for finishes, fixtures and furniture (FFF).</li>
+                    <li>Clarifications for contractors and suppliers as needed.</li>
+                    <li>Optional styling and final layer consultation after construction.</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">You receive</div>
+                    <div class="process-meta-value">
+                      Construction-ready drawings, schedules and reference images for implementation.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Typical duration</div>
+                    <div class="process-meta-value">
+                      Varies with project scale; often 2–6 weeks in parallel with contractor planning.
+                    </div>
+                  </div>
+                  <div class="process-meta-block">
+                    <div class="process-meta-label">Collaboration</div>
+                    <div class="process-meta-value">
+                      Email / call support, mark-ups on contractor drawings, optional site visits (where feasible).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-sub">
+        A few common questions about working together. If you don’t see your question here, feel free to ask in your inquiry.
+      </p>
+
+      <div class="faq-list mt-36">
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>What locations do you work in?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              I am based between Dubai (UAE) and Marbella (Spain), and I work with clients worldwide.
+              Most projects are managed remotely via calls, shared documents and visualizations.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you take on remote-only projects?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Most of my projects are fully remote. We collaborate through video calls, email, and shared folders,
+              and I provide drawings and 3D visuals that can be used locally by your contractors.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can you help with both architecture and interior design?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutely. I often design both the architectural layout and the interiors, so that structure, light,
+              materials and furniture feel coherent and calm as one space.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can you help with both architecture and interior design?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutely. I often design both the architectural layout and the interiors, so that structure, light,
+              materials and furniture feel coherent and calm as one space.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>How much do your services cost?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Each project is priced individually, depending on its size, complexity and scope 
+              (architecture only, interiors, full package, or visualization). 
+              After our initial discussion and a review of your plans or brief, 
+              I prepare a tailored proposal with a clear breakdown of stages and fees.
+            </p>
+            <p>
+              If you share a few details in the contact form—location, approximate area and timeline—
+              I can also give you an estimated fee range for your specific case.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Can we work together through Upwork?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Yes — if you prefer, we can work through Upwork. I offer both 
+              <strong>fixed-budget projects</strong> as well as 
+              <strong>hourly collaboration at $40/hour</strong>.
+            </p>
+            <p>
+              For larger or well-defined scopes, a fixed price is usually the most efficient.  
+              For smaller tasks, ongoing consulting or visualization requests, the hourly model works well.  
+              Just let me know your preference when you inquire.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>At which stage should I contact you for a project?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Ideally, as early as possible—before major construction decisions are fixed.
+              However, I can join at different stages: from early concept to interior re-design and visualization.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span>Do you provide construction supervision on site?</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              For nearby projects, I may be able to visit in person. For international projects,
+              I usually provide remote support—reviewing contractor drawings, answering questions and giving feedback on photos from site.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARATOR -->
+  <div class="separator"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="panel">
+    <div class="section-inner fade-up">
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-card mt-16">
+        <div class="contact-grid">
+          <div class="contact-intro">
+            <h3>Begin Your Project</h3>
+            <p>
+              Share a few details about your project—location, type and timeline—and I’ll respond with next steps,
+              an approximate scope and how we can collaborate.
+            </p>
+
+            <div class="contact-details">
+              <p>
+                <span class="label">Email:</span>
+                <a href="mailto:anzhelika.des.ign@gmail.com">anzhelika.des.ign@gmail.com</a>
+              </p>
+              <p>
+                <span class="label">Location:</span>
+                <span>Dubai UAE · Marbella Spain · Working remotely worldwide</span>
+              </p>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-name">Your name</label>
+                <input id="contact-name" name="name" type="text" placeholder="John Smith" required>
+              </div>
+              <div class="form-field">
+                <label for="contact-email">Email</label>
+                <input id="contact-email" name="email" type="email" placeholder="you@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-project-type">Project type</label>
+                <select id="contact-project-type" name="projectType">
+                  <option value="">Select...</option>
+                  <option>Residential · Architecture</option>
+                  <option>Residential · Interior Design</option>
+                  <option>Commercial / Hospitality</option>
+                  <option>3D Visualization only</option>
+                  <option>Other / Not sure yet</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="contact-budget">Approx. designed area</label>
+                <select id="contact-budget" name="budget">
+                  <option value="">Select...</option>
+                  <option>Under 100 sq.m.</option>
+                  <option>100 – 250 sq.m.</option>
+                  <option>250 – 500 sq.m.</option>
+                  <option>500 - 1000 sq.m.</option>
+                  <option>1000 sq.m. +</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-timeline">Timeline</label>
+                <select id="contact-timeline" name="timeline">
+                  <option value="">Select...</option>
+                  <option>Urgent · within 1 month</option>
+                  <option>1–3 months</option>
+                  <option>3–6 months</option>
+                  <option>6+ months / early planning</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field form-field-full">
+              <label for="contact-message">Project notes</label>
+              <textarea id="contact-message" name="message" placeholder="Tell me about your site or apartment, what you’d like to change, and how you’d like the space to feel." required></textarea>
+            </div>
+
+            <div class="contact-checkbox">
+              <input id="contact-files" name="filesLater" type="checkbox">
+              <label for="contact-files">
+                I have dimension plans, photos and send all resourses later once we connect.
+              </label>
+            </div>
+
+            <button type="submit" class="cta mt-16">Send Inquiry</button>
+            <div class="contact-form-note">
+              No newsletter, no spam—just a thoughtful reply within a few business days.<br>
+              By submitting this form, you agree to the
+              <button type="button" class="modal-link" data-modal="terms">Terms of Use</button>
+              and
+              <button type="button" class="modal-link" data-modal="privacy">Privacy Policy</button>.
+            </div>
+
+            <div class="contact-form-status" id="contact-form-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SUCCESS MODAL -->
+  <div class="modal-overlay" id="contact-success-modal">
+    <div class="modal-backdrop" data-close-contact-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-success-title">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="contact-success-title">Inquiry sent</div>
+          <div class="modal-sub">Thank you for your message.</div>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close" data-close-contact-modal>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="contact-success-message" class="modal-sub">
+          Your inquiry has been sent successfully. I’ll get back to you as soon as possible.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal-title">Preview</div>
+          <div class="modal-sub" id="modal-sub"></div>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close" data-close-modal>&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- DRAWINGS -->
+        <div class="modal-section" data-modal-section="drawings">
+          <p class="modal-sub" style="margin-bottom:10px;">
+            Sample set of architectural drawings. Use your browser’s controls to zoom and navigate.
+          </p>
+          <div class="modal-embed-frame">
+            <iframe data-src="drawings.pdf" title="Architectural drawings preview"></iframe>
+          </div>
+        </div>
+
+        <!-- WALKTHROUGH -->
+        <div class="modal-section" data-modal-section="walkthrough">
+          <p class="modal-sub" style="margin-bottom:10px;">
+            Interactive 360° walkthrough example. Click and drag to look around.
+          </p>
+          <div class="modal-embed-frame">
+            <iframe
+              data-src="https://kuula.co/share/collection/7JYlF?logo=1&info=1&fs=1&vr=0&thumbs=1"
+              allow="xr-spatial-tracking; gyroscope; accelerometer"
+              allowfullscreen
+              scrolling="no"
+              title="3D walkthrough example">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- VIDEOS -->
+        <div class="modal-section" data-modal-section="videos">
+          <p class="modal-sub" style="margin-bottom:12px;">
+            A selection of animation excerpts demonstrating motion, pacing and atmosphere.
+          </p>
+          <div class="modal-video-grid">
+            <div class="video-card">
+              <h3>Bedroom Fly-through</h3>
+              <p>Cinematic pass through a soft, tactile bedroom interior with layered lighting.</p>
+              <video controls preload="metadata">
+                <source src="videos/animation1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-card">
+              <h3>Corridor Animation</h3>
+              <p>Minimalist corridor sequence focusing on depth, contrast and pacing.</p>
+              <video controls preload="metadata">
+                <source src="videos/animation2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-card">
+              <h3>Bathroom Atmosphere Reel</h3>
+              <p>Slow, atmospheric cuts highlighting fixtures, reflections and material transitions.</p>
+              <video controls preload="metadata">
+                <source src="videos/animation3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRIVACY POLICY MODAL -->
+        <div class="modal-section" data-modal-section="privacy">
+          <div class="legal-block-title">Privacy Policy</div>
+          <div class="legal-updated">Last updated: 25 November 2025</div>
+          <div class="legal-text">
+            <p>
+              This Privacy Policy explains how Anigna Design (“I”, “me”, or “the studio”) collects, uses and protects
+              personal information when you visit this website or contact me about a project.
+            </p>
+
+            <h4>1. Information I collect</h4>
+            <p>I may collect the following types of information:</p>
+            <ul>
+              <li><strong>Information you provide directly</strong> – for example, your name, email address, phone number, project details and any files or links you send when you fill in the contact form or write to me by email.</li>
+              <li><strong>Basic technical information</strong> – such as your IP address, browser type, device information and pages viewed. This is typically collected automatically by your browser, hosting provider or any analytics tools in use.</li>
+              <li><strong>Communication records</strong> – emails and messages exchanged as part of discussing or delivering a project.</li>
+            </ul>
+
+            <h4>2. How your information is used</h4>
+            <p>Your information is used to:</p>
+            <ul>
+              <li>Respond to your inquiries and communicate with you about potential or ongoing projects.</li>
+              <li>Prepare proposals, design documentation and other project-related materials.</li>
+              <li>Operate, maintain and improve this website and my services.</li>
+              <li>Comply with applicable legal or accounting obligations.</li>
+            </ul>
+
+            <h4>3. Legal basis for processing</h4>
+            <p>
+              Depending on where you live, the processing of your personal data may be based on:
+            </p>
+            <ul>
+              <li>Your <strong>consent</strong> (for example, when you choose to send an inquiry).</li>
+              <li><strong>Legitimate interests</strong> of the studio (for example, providing architectural and interior design services and communicating with clients).</li>
+              <li><strong>Legal obligations</strong> (for example, keeping certain records for tax or accounting purposes).</li>
+            </ul>
+
+            <h4>4. Sharing of information</h4>
+            <p>
+              I do not sell your personal information. I may share it only with:
+            </p>
+            <ul>
+              <li><strong>Service providers</strong> such as email, cloud storage, website hosting or project management tools, strictly for operating the studio and delivering services.</li>
+              <li><strong>Collaborators and consultants</strong> (for example, engineers or other designers) if this is needed to deliver your project, and where appropriate confidentiality is maintained.</li>
+              <li><strong>Authorities</strong> where I am legally required to do so.</li>
+            </ul>
+
+            <h4>5. International transfers</h4>
+            <p>
+              As I may work with clients and service providers based in different countries, your information may be transferred and stored in other jurisdictions.
+              I aim to work only with reputable providers that take appropriate measures to protect personal data.
+            </p>
+
+            <h4>6. Data retention</h4>
+            <p>
+              I keep personal information only for as long as it is reasonably necessary for the purposes described in this policy,
+              including any legal, accounting or reporting obligations. Project records may be kept for longer to document the work carried out.
+            </p>
+
+            <h4>7. Your rights</h4>
+            <p>
+              Depending on your location, you may have rights such as:
+            </p>
+            <ul>
+              <li>Accessing the personal data I hold about you.</li>
+              <li>Requesting corrections of inaccurate information.</li>
+              <li>Requesting deletion of your personal data, where applicable.</li>
+              <li>Objecting to certain types of processing or withdrawing consent, where processing is based on consent.</li>
+            </ul>
+            <p>
+              To exercise any of these rights, you can contact me at
+              <a href="mailto:anzhelika.des.ign@gmail.com">anzhelika.des.ign@gmail.com</a>.
+            </p>
+
+            <h4>8. Security</h4>
+            <p>
+              I take reasonable steps to protect your information from loss, misuse, and unauthorized access.
+              However, no method of transmission or storage can be guaranteed to be 100% secure.
+            </p>
+
+            <h4>9. Cookies and analytics</h4>
+            <p>
+              This website may use cookies or similar technologies to function properly and to understand general usage patterns.
+              You can usually control cookies via your browser settings. If you use browser-based blocking tools,
+              some parts of the site may not function perfectly.
+            </p>
+
+            <h4>10. Updates to this policy</h4>
+            <p>
+              I may update this Privacy Policy occasionally to reflect changes in the studio’s practices or applicable laws.
+              The “Last updated” date above indicates when it was most recently revised.
+            </p>
+          </div>
+        </div>
+
+        <!-- TERMS OF USE MODAL -->
+        <div class="modal-section" data-modal-section="terms">
+          <div class="legal-block-title">Terms of Use</div>
+          <div class="legal-updated">Last updated: 25 November 2025</div>
+          <div class="legal-text">
+            <p>
+              These Terms of Use govern your access to and use of this website operated by Anigna Design.
+              By visiting this site, you agree to these terms.
+            </p>
+
+            <h4>1. Purpose of the website</h4>
+            <p>
+              This website is intended to showcase selected work, explain services offered and provide a way to contact the studio.
+              The content is for general information only and does not constitute technical, legal or financial advice.
+            </p>
+
+            <h4>2. Use of content</h4>
+            <p>
+              All content on this website, including text, images, graphics, logos and layouts, is owned by Anigna Design
+              or used with permission, and is protected by applicable copyright and intellectual property laws.
+            </p>
+            <p>
+              You may:
+            </p>
+            <ul>
+              <li>View the website in your browser.</li>
+              <li>Download or print single copies of pages for your personal, non-commercial use.</li>
+            </ul>
+            <p>
+              You may not:
+            </p>
+            <ul>
+              <li>Republish, redistribute, modify or use the content for commercial purposes without prior written permission.</li>
+              <li>Claim the designs, images or texts as your own work.</li>
+            </ul>
+
+            <h4>3. Project images and descriptions</h4>
+            <p>
+              Project visuals and descriptions shown on this site may represent concept designs, visualizations or completed works.
+              Actual built results can differ due to technical, regulatory, budget or execution constraints.
+            </p>
+
+            <h4>4. No guarantee</h4>
+            <p>
+              While I aim to keep the information on this website accurate and up to date, I make no representations or warranties
+              of any kind, express or implied, about the completeness, reliability or suitability of the information or services shown.
+              Any reliance you place on such information is strictly at your own risk.
+            </p>
+
+            <h4>5. Limitation of liability</h4>
+            <p>
+              To the fullest extent permitted by law, Anigna Design shall not be liable for any indirect, incidental, special or consequential
+              damages, or any loss of data, revenue or profit, arising from your use of this website.
+            </p>
+
+            <h4>6. Third-party links</h4>
+            <p>
+              This website may include links or embedded content from third-party platforms (for example, 3D walkthroughs or video hosting).
+              I am not responsible for the content, security or privacy practices of those external sites.
+              You should review their own terms and policies when visiting them.
+            </p>
+
+            <h4>7. Contact and collaborations</h4>
+            <p>
+              Any potential collaboration or project is subject to a separate written agreement that defines scope, fees, responsibilities
+              and other conditions. Nothing on this website creates a contract or professional relationship by itself.
+            </p>
+
+            <h4>8. Governing law</h4>
+            <p>
+              These Terms of Use are intended to be governed by the laws of <strong>[Your Country]</strong>, unless otherwise required by local law.
+              You should adapt this section to reflect your actual place of business and applicable jurisdiction.
+            </p>
+
+            <h4>9. Changes to these terms</h4>
+            <p>
+              I may update these Terms of Use from time to time. The “Last updated” date above indicates when they were most recently revised.
+              Continued use of the website after changes are posted will be deemed acceptance of the updated terms.
+            </p>
+
+            <h4>10. Contact</h4>
+            <p>
+              If you have any questions about these Terms of Use, you can reach me at
+              <a href="mailto:anzhelika.des.ign@gmail.com">anzhelika.des.ign@gmail.com</a>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+
+      <div>© <span id="footer-year"></span> Anigna Design. All rights reserved.</div>
+
+      <!-- SOCIAL LINKS -->
+      <div class="social-links">
+        <a href="https://www.instagram.com/angis_designing" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <a href="https://www.facebook.com/people/only_oneinteriors/100089218965075/?mibextid=LQQJ4d" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v3H7v4h3v7h4v-7h3l1-4h-4V8c0-.6.4-1 1-1z"
+                  fill="currentColor"/>
+          </svg>
+        </a>
+
+        <a href="https://www.tiktok.com/@only_one.interiors" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M20 7.5c-2 0-3.7-1.6-3.9-3.6h-3.1v11.3c0 1.7-1.4 3.1-3.1 3.1S6.9 16.9 6.9 15.2c0-1.7 
+                    1.4-3.1 3.1-3.1.3 0 .7.1 1 .2V9.1c-.3 0-.7-.1-1-.1-3.4 0-6.2 2.8-6.2 6.2S6.6 21.4 10 21.4 
+                    s6.2-2.8 6.2-6.2V9.2c1 0 2 .3 2.9.8V7.5z"
+                  fill="currentColor"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- LEGAL LINKS -->
+      <div class="site-footer-links">
+        <button type="button" class="modal-link" data-modal="privacy">Privacy Policy</button>
+        <button type="button" class="modal-link" data-modal="terms">Terms of Use</button>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+    // Fade-up + Separator observers
+    const faders = document.querySelectorAll('.fade-up');
+    const separators = document.querySelectorAll('.separator');
+
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          o.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    faders.forEach(el => obs.observe(el));
+    separators.forEach(el => obs.observe(el));
+
+    function staggerIn(selector) {
+      const group = document.querySelector(selector);
+      if (!group) return;
+      const items = [...group.children];
+
+      items.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = `opacity .9s cubic-bezier(.25,.1,.25,1) ${0.1 * i}s, transform .9s cubic-bezier(.25,.1,.25,1) ${0.1 * i}s`;
+      });
+
+      const io = new IntersectionObserver((entries, o) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            items.forEach(el => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            });
+            o.disconnect();
+          }
+        });
+      }, { threshold: .2 });
+
+      io.observe(group);
+    }
+
+    staggerIn('.cards');
+    staggerIn('.steps');
+
+    /* PROCESS INTERACTIVITY */
+    const processStepChips = document.querySelectorAll('.process-step-chip');
+    const processDetailPanels = document.querySelectorAll('[data-step-detail]');
+    const processProgressFill = document.querySelector('.process-progress-fill');
+
+    function activateProcessStep(key) {
+      if (!key) return;
+
+      processStepChips.forEach((btn, index) => {
+        const isActive = btn.dataset.step === key;
+        btn.classList.toggle('active', isActive);
+
+        if (isActive && processProgressFill) {
+          const total = processStepChips.length - 1;
+          const percentage = total > 0 ? (index / total) * 100 : 0;
+          processProgressFill.style.width = `${percentage}%`;
+        }
+      });
+
+      processDetailPanels.forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.stepDetail === key);
+      });
+    }
+
+    processStepChips.forEach(btn => {
+      const key = btn.dataset.step;
+      btn.addEventListener('mouseenter', () => activateProcessStep(key));
+      btn.addEventListener('click', () => activateProcessStep(key));
+    });
+
+    activateProcessStep('concept');
+
+    /* CONTACT FORM + SUCCESS MODAL */
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-form-status');
+
+    // success popup modal elements
+    const contactSuccessModal = document.getElementById('contact-success-modal');
+    const contactSuccessMessage = document.getElementById('contact-success-message');
+    const contactSuccessCloseEls = document.querySelectorAll('[data-close-contact-modal]');
+
+    function openContactSuccessModal(name, email) {
+      if (!contactSuccessModal) return;
+
+      if (contactSuccessMessage && name && email) {
+        contactSuccessMessage.textContent =
+          `Thank you, ${name}. Your inquiry has been sent successfully. I’ll reply to ${email} as soon as possible.`;
+      }
+
+      contactSuccessModal.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeContactSuccessModal() {
+      if (!contactSuccessModal) return;
+      contactSuccessModal.classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    // close events for success modal
+    contactSuccessCloseEls.forEach(el => {
+      el.addEventListener('click', closeContactSuccessModal);
+    });
+
+    if (contactSuccessModal) {
+      contactSuccessModal.addEventListener('click', (e) => {
+        if (e.target === contactSuccessModal) {
+          closeContactSuccessModal();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && contactSuccessModal && contactSuccessModal.classList.contains('visible')) {
+        closeContactSuccessModal();
+      }
+    });
+
+    if (contactForm && contactStatus) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const name = (formData.get('name') || '').toString().trim();
+        const email = (formData.get('email') || '').toString().trim();
+        const message = (formData.get('message') || '').toString().trim();
+
+        if (!name || !email || !message) {
+          contactStatus.textContent = 'Please fill in your name, email and a short project description.';
+          contactStatus.classList.remove('success');
+          contactStatus.classList.add('error');
+          return;
+        }
+
+        contactStatus.textContent = 'Sending your inquiry...';
+        contactStatus.classList.remove('success', 'error');
+
+        try {
+          // 👉 Replace this URL with your real endpoint or form service URL
+          // e.g. Formspree: 'https://formspree.io/f/yourformid'
+          const endpointUrl = 'https://formspree.io/f/mnnevnqk';
+
+          const response = await fetch(endpointUrl, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+              // IMPORTANT: do not set Content-Type manually when sending FormData
+            },
+            body: formData
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          // success: show popup and clear form
+          contactStatus.textContent = '';
+          contactStatus.classList.remove('error');
+          contactStatus.classList.add('success');
+
+          openContactSuccessModal(name, email);
+          contactForm.reset();
+        } catch (err) {
+          console.error(err);
+          contactStatus.textContent =
+            'Sorry, something went wrong while sending your inquiry. Please try again or email me directly at anzhelika.des.ign@gmail.com.';
+          contactStatus.classList.remove('success');
+          contactStatus.classList.add('error');
+        }
+      });
+    }
+
+    /* MODAL LOGIC (DRAWINGS / WALKTHROUGH / VIDEOS / LEGAL) */
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSub = document.getElementById('modal-sub');
+    const modalSections = modal.querySelectorAll('[data-modal-section]');
+    const modalTriggers = document.querySelectorAll('[data-modal]');
+    const modalCloseEls = document.querySelectorAll('[data-close-modal]');
+    const modalIframes = document.querySelectorAll('.modal-embed-frame iframe');
+
+    const MODAL_COPY = {
+      drawings: {
+        title: 'Architectural Drawings',
+        sub: 'Plans, sections and details prepared for construction.'
+      },
+      walkthrough: {
+        title: '3D Walkthrough',
+        sub: 'Explore the space in an immersive 360° view.'
+      },
+      videos: {
+        title: 'Animation & Motion',
+        sub: 'Short sequences that bring the project to life.'
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        sub: 'How your data is collected, used and protected.'
+      },
+      terms: {
+        title: 'Terms of Use',
+        sub: 'The basic rules for using this website and services.'
+      }
+    };
+
+    function setIframeSources(activeKey) {
+      modalIframes.forEach(frame => {
+        const parentSection = frame.closest('[data-modal-section]');
+        const key = parentSection ? parentSection.dataset.modalSection : null;
+        const dataSrc = frame.dataset.src;
+        if (!key) return;
+
+        if (key === activeKey) {
+          if (dataSrc && !frame.src) frame.src = dataSrc;
+        } else {
+          if (frame.src) frame.src = '';
+        }
+      });
+    }
+
+    function pauseAllVideos() {
+      const vids = modal.querySelectorAll('video');
+      vids.forEach(v => v.pause());
+    }
+
+    function openModal(which) {
+      modalSections.forEach(sec => {
+        sec.classList.toggle('active', sec.dataset.modalSection === which);
+      });
+
+      const copy = MODAL_COPY[which] || MODAL_COPY.drawings;
+      modalTitle.textContent = copy.title;
+      modalSub.textContent = copy.sub;
+
+      setIframeSources(which);
+      pauseAllVideos();
+
+      modal.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('visible');
+      document.body.style.overflow = '';
+      setIframeSources(null);
+      pauseAllVideos();
+    }
+
+    modalTriggers.forEach(btn => {
+      btn.addEventListener('click', e => {
+        const which = btn.dataset.modal;
+        if (!which) return;
+        e.preventDefault();
+        openModal(which);
+      });
+    });
+
+    modalCloseEls.forEach(el => el.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('visible')) {
+        closeModal();
+      }
+    });
+
+    // Footer year
+    const footerYearEl = document.getElementById('footer-year');
+    if (footerYearEl) {
+      footerYearEl.textContent = new Date().getFullYear();
+    }
+
+    /* PROJECT ITEM CLICK NAVIGATION */
+    const portfolioItems = document.querySelectorAll('#projects .portfolio-item');
+
+    portfolioItems.forEach(item => {
+      const key = item.dataset.project;
+      if (!key) return;
+
+      item.addEventListener('click', () => {
+        window.location.href = `projects/${key}.html`;
+      });
+    });
+
+    /* SHOW MORE PROJECTS BUTTON – REVEAL HIDDEN CARDS (10, 11, 12) */
+    const showMoreBtn = document.getElementById('show-more-projects-btn');
+    const projectsSection = document.getElementById('projects');
+    const extraProjectItems = document.querySelectorAll('#projects .portfolio-item.extra-project');
+
+    if (showMoreBtn && projectsSection && extraProjectItems.length) {
+      let isExpanded = false;
+
+      showMoreBtn.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        projectsSection.classList.toggle('expanded', isExpanded);
+        showMoreBtn.textContent = isExpanded ? 'Hide extra projects' : 'Show more projects';
+
+        // simple staggered reveal animation for the extra items
+        if (isExpanded) {
+          extraProjectItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(24px)';
+            item.style.transition = `opacity .9s var(--ease) ${0.08 * index}s, transform .9s var(--ease) ${0.08 * index}s`;
+
+            requestAnimationFrame(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'translateY(0)';
+            });
+          });
+        }
+      });
+    }
+
+    /* FAQ ACCORDION */
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const qBtn = item.querySelector('.faq-question');
+      if (!qBtn) return;
+
+      qBtn.addEventListener('click', () => {
+        // Just toggle this one, don't touch the others
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>

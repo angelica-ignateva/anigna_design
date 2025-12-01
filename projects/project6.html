@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shadow Dome Configurator — Anigna Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f0f;
+  --bg-soft:#141414;
+  --light:#f5f3ef;
+  --muted:#aaa;
+  --muted-soft:#888;
+  --gold:#bba673;
+  --border-soft:rgba(255,255,255,0.1);
+  --ease:cubic-bezier(.25,.1,.25,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Outfit',sans-serif;
+  background:radial-gradient(circle at top,#1b1b1b 0%,#050505 55%,#000 100%);
+  color:var(--light);
+  line-height:1.8;
+  overflow-x:hidden;
+}
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 50px;
+  transition:all .6s var(--ease);
+  background:rgba(15,15,15,.98);
+  border-bottom:1px solid rgba(187,166,115,.15);
+  backdrop-filter:blur(12px);
+  box-shadow:0 4px 24px rgba(0,0,0,.4);
+}
+nav img.logo{
+  height:42px;
+  width:auto;
+  transition:transform .4s var(--ease);
+}
+nav img.logo:hover{transform:scale(1.05);}
+nav a{
+  text-decoration:none;
+  color:var(--muted);
+  margin-left:32px;
+  font-size:13px;
+  letter-spacing:.12em;
+  position:relative;
+  transition:color .4s var(--ease);
+}
+nav a::after{
+  content:'';
+  position:absolute;
+  bottom:-2px;
+  left:0;
+  width:0;
+  height:1px;
+  background:var(--gold);
+  transition:width .4s var(--ease);
+}
+nav a:hover{color:var(--gold);}
+nav a:hover::after{width:100%;}
+nav a.logo-link::after {
+      display: none !important;
+    }
+
+a{text-decoration:none;color:var(--gold)}
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.page-wrap{min-height:100vh;}
+.main{
+  max-width:1300px;
+  margin:0 auto;
+  padding:120px 24px 60px;
+  min-height:calc(100vh - 90px);
+}
+.back-row{margin-bottom:20px;}
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 16px;
+  border-radius:999px;
+  border:1px solid rgba(187,166,115,0.5);
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  background:rgba(0,0,0,0.45);
+  cursor:pointer;
+  transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.back-btn:hover{
+  color:var(--light);
+  background:rgba(187,166,115,0.12);
+  border-color:var(--gold);
+  box-shadow:0 10px 28px rgba(0,0,0,0.6);
+  transform:translateY(-1px);
+}
+.project-shell{
+  display:grid;
+  grid-template-columns:minmax(0,1.8fr) minmax(0,1.1fr);
+  gap:36px;
+  align-items:stretch;
+  min-height:calc(100vh - 190px);
+}
+.gallery-panel{
+  display:grid;
+  grid-template-columns:minmax(0,120px) minmax(0,1fr);
+  gap:14px;
+  align-items:stretch;
+  height:100%;
+  overflow-y:visible;
+  padding-right:0;
+}
+.gallery-main-col{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.thumb-grid{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  height:calc(100vh - 220px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:4px;
+}
+.thumb-grid::-webkit-scrollbar{width:6px;}
+.thumb-grid::-webkit-scrollbar-track{
+  background:rgba(0,0,0,0.65);
+  border-radius:999px;
+}
+.thumb-grid::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.35);
+  border-radius:999px;
+}
+.thumb{
+  width:100%;
+  aspect-ratio:4/3;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.12);
+  cursor:pointer;
+  position:relative;
+  transition:border-color .3s var(--ease),transform .2s var(--ease),box-shadow .3s var(--ease),opacity .3s var(--ease);
+  opacity:0.88;
+  background:#000;
+  flex:0 0 auto;
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.thumb.active{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px rgba(187,166,115,0.85);
+  opacity:1;
+}
+.thumb:hover{
+  transform:translateY(-1px);
+  opacity:1;
+}
+.gallery-main{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  background:#050505;
+  border:1px solid var(--border-soft);
+  min-height:clamp(380px,calc(100vh - 260px),820px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.gallery-main img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+  margin:auto;
+}
+.gallery-main-label{
+  position:absolute;
+  left:16px;
+  bottom:14px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  background:rgba(0,0,0,0.72);
+  color:rgba(255,255,255,0.9);
+}
+.gallery-main-fullscreen{
+  position:absolute;
+  right:16px;
+  bottom:14px;
+  border:none;
+  border-radius:999px;
+  padding:6px 12px;
+  background:rgba(0,0,0,0.72);
+  color:var(--light);
+  font-size:13px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:background .3s var(--ease),transform .2s var(--ease),opacity .3s var(--ease);
+}
+.gallery-main-fullscreen span.icon{font-size:16px;}
+.gallery-main-fullscreen:hover{
+  background:rgba(0,0,0,0.9);
+  transform:translateY(-1px);
+}
+.gallery-caption{
+  font-size:13px;
+  color:var(--muted);
+}
+.info-panel{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.info-meta-label{
+  font-size:12px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--muted-soft);
+}
+.info-title{
+  font-family:'Playfair Display',serif;
+  font-size:30px;
+  margin-top:2px;
+  color:var(--light);
+}
+.info-tagline{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:4px;
+}
+.info-copy p{
+  margin-bottom:10px;
+  font-size:15px;
+  color:var(--light);
+}
+.info-data{
+  border-radius:20px;
+  border:1px solid var(--border-soft);
+  background:rgba(10,10,10,0.9);
+  padding:18px 18px 16px;
+  font-size:13px;
+}
+.info-data-title{
+  font-size:11px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--muted-soft);
+  margin-bottom:10px;
+}
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:4px;
+}
+.info-label{color:var(--muted-soft);}
+.info-value{
+  color:var(--light);
+  text-align:right;
+}
+.info-note{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted-soft);
+}
+.tag-row{
+  margin-top:10px;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted-soft);
+}
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .35s var(--ease),visibility .35s var(--ease);
+  z-index:1000;
+}
+.lightbox.active{
+  opacity:1;
+  visibility:visible;
+}
+.lightbox-inner{
+  position:relative;
+  max-width:100vw;
+  max-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.lightbox-img-wrap{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  max-height:100vh;
+}
+.lightbox img{
+  max-width:100vw;
+  max-height:100vh;
+  object-fit:contain;
+  border:none;
+  box-shadow:none;
+  background:#000;
+}
+.lightbox-top{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:12px;
+  color:var(--muted);
+  pointer-events:none;
+}
+.lightbox-counter{
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(0,0,0,0.7);
+  border:1px solid rgba(255,255,255,0.18);
+}
+.lightbox-caption{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+  text-align:center;
+  max-width:680px;
+}
+.lightbox .close,
+.lightbox .arrow{
+  position:absolute;
+  color:var(--gold);
+  font-size:32px;
+  cursor:pointer;
+  user-select:none;
+  transition:opacity .25s var(--ease),transform .25s var(--ease);
+}
+.lightbox .close{
+  top:18px;
+  right:26px;
+  font-size:30px;
+}
+.lightbox .arrow{
+  top:50%;
+  transform:translateY(-50%);
+}
+.lightbox .arrow.left{left:-48px;}
+.lightbox .arrow.right{right:-48px;}
+.lightbox .close:hover,
+.lightbox .arrow:hover{
+  opacity:.85;
+  transform:translateY(-50%) scale(1.05);
+}
+.lightbox .close:hover{transform:none;}
+.lightbox-hit-left,
+.lightbox-hit-right{
+  position:absolute;
+  inset:0;
+  width:50%;
+  cursor:pointer;
+  background:transparent;
+}
+.lightbox-hit-left{left:0;}
+.lightbox-hit-right{right:0;}
+@media(max-width:900px){
+  .project-shell{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+  .gallery-panel{
+    grid-template-columns:1fr;
+    height:auto;
+    overflow-y:visible;
+  }
+  .gallery-main-col{order:1;}
+  .thumb-grid{
+    order:2;
+    flex-direction:row;
+    height:auto;
+    max-height:none;
+    overflow-x:auto;
+    overflow-y:hidden;
+    margin-top:10px;
+  }
+  .thumb{
+    flex:0 0 120px;
+    height:80px;
+  }
+}
+@media(max-width:600px){
+  .lightbox .arrow{display:none;}
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<nav id="nav">
+  <a href="../index.html" class="logo-link">
+    <img src="../img/logo-horizontal.png" class="logo" alt="Anigna Design Logo">
+  </a>
+  <div>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#services">Services</a>
+    <a href="../index.html#process">Process</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <main class="main">
+    <div class="back-row">
+      <button class="back-btn" type="button" onclick="window.location.href='../index.html#projects'">
+        <span>←</span>
+        <span>Back to Projects</span>
+      </button>
+    </div>
+
+    <div class="project-shell">
+
+      <!-- LEFT: GALLERY -->
+      <section class="gallery-panel">
+        <!-- Vertical thumbnails -->
+        <div class="thumb-grid" id="thumb-grid">
+          <div class="thumb"><img src="../img/project6/01.JPG" alt="Outdoor dining terrace with pergola shading" data-caption="Outdoor dining terrace with soft seating and pergola shading, offering a warm connection to the garden."></div>
+          <div class="thumb"><img src="../img/project6/02.JPG" alt="Front facade of the residence" data-caption="Front facade of the residence, showing clean modern lines and natural material contrasts."></div>
+          <div class="thumb"><img src="../img/project6/03.JPG" alt="Angled exterior view with terrace and balcony" data-caption="Angled view of the exterior, highlighting the terrace, upper balcony and landscaped surroundings."></div>
+          <div class="thumb"><img src="../img/project6/04.JPG" alt="Styled outdoor table setting" data-caption="Close-up of the outdoor table setting, styled with greenery and natural textures."></div>
+          <div class="thumb"><img src="../img/project6/05.JPG" alt="Living and dining area with panoramic glazing" data-caption="Living and dining area with panoramic glazing, blending indoor comfort with views of nature."></div>
+          <div class="thumb"><img src="../img/project6/06.JPG" alt="Corner seating by floor-to-ceiling windows" data-caption="Corner seating arrangement framed by floor-to-ceiling windows and warm neutral tones."></div>
+          <div class="thumb"><img src="../img/project6/07.JPG" alt="Main living room composition" data-caption="Main living room composition featuring low furniture and a balanced contemporary palette."></div>
+          <div class="thumb"><img src="../img/project6/08.JPG" alt="Kitchen and dining zone" data-caption="Kitchen and dining zone with refined material transitions and elegant built-in lighting."></div>
+          <div class="thumb"><img src="../img/project6/09.JPG" alt="Entry hall with natural light" data-caption="Entry hall with integrated storage and soft natural light from the courtyard side."></div>
+          <div class="thumb"><img src="../img/project6/10.JPG" alt="Transition area with timber slats" data-caption="Transition area showcasing vertical timber slats and a warm, minimal aesthetic."></div>
+          <div class="thumb"><img src="../img/project6/11.JPG" alt="Dining area with sculptural lighting" data-caption="Dining area with slim-profile chairs and sculptural lighting over a central island."></div>
+          <div class="thumb"><img src="../img/project6/12.JPG" alt="Open-plan living space" data-caption="Open-plan living space with a continuous flow between lounge, dining and exterior."></div>
+          <div class="thumb"><img src="../img/project6/13.JPG" alt="Minimalist staircase" data-caption="Minimalist staircase in soft stone tones, illuminated by a narrow vertical window."></div>
+          <div class="thumb"><img src="../img/project6/14.JPG" alt="Full-height window with garden view" data-caption="Full-height window framing lush exterior greenery from the interior."></div>
+          <div class="thumb"><img src="../img/project6/15.JPG" alt="Bedroom entrance sequence" data-caption="Bedroom entrance sequence featuring warm wood finishes and soft tonal contrasts."></div>
+          <div class="thumb"><img src="../img/project6/16.JPG" alt="Master bedroom overview" data-caption="Master bedroom overview with low furniture, layered textiles and calm symmetry."></div>
+          <div class="thumb"><img src="../img/project6/17.JPG" alt="Bedside detail with soft materials" data-caption="Bedside detail highlighting soft bedding layers and refined natural materials."></div>
+          <div class="thumb"><img src="../img/project6/18.JPG" alt="Warm timber shelving detail" data-caption="Warm timber shelving with curated objects contributing to a calm interior composition."></div>
+          <div class="thumb"><img src="../img/project6/19.JPG" alt="Dark corridor with greenery view" data-caption="Long corridor accented with controlled lighting and a framed view of exterior greenery."></div>
+          <div class="thumb"><img src="../img/project6/20.JPG" alt="Walk-in closet with lighting" data-caption="Walk-in closet featuring integrated lighting and a refined, organised spatial layout."></div>
+          <div class="thumb"><img src="../img/project6/21.JPG" alt="Stair landing with greenery" data-caption="Stair landing space enhanced by greenery and soft daylight filtering through the openings."></div>
+          <div class="thumb"><img src="../img/project6/22.JPG" alt="Staircase and lower level connection" data-caption="Staircase overview showing the connection between levels framed by natural textures."></div>
+          <div class="thumb"><img src="../img/project6/23.JPG" alt="Gallery-like entry corridor" data-caption="Gallery-like corridor with sculptural elements guiding movement toward the central space."></div>
+          <div class="thumb"><img src="../img/project6/24.JPG" alt="Natural-light filled hallway" data-caption="Hallway illuminated by soft natural light, accentuating minimal detailing."></div>
+          <div class="thumb"><img src="../img/project6/25.JPG" alt="Upper landing with railings" data-caption="Upper landing with light metal railings and suspended lighting elements."></div>
+          <div class="thumb"><img src="../img/project6/26.JPG" alt="Lower-level space with greenery" data-caption="Lower-level view combining minimal finishes with greenery to create a soft, serene atmosphere."></div>
+          <div class="thumb"><img src="../img/project6/27.JPG" alt="Gym or wellness area" data-caption="Light-filled gym/wellness area overlooking planted spaces and soft architectural lines."></div>
+          <div class="thumb"><img src="../img/project6/28.JPG" alt="Bathroom overview" data-caption="Bathroom overview featuring soft neutral tones, clean lines and diffused daylight."></div>
+          <div class="thumb"><img src="../img/project6/29.JPG" alt="Minimal bathtub and window" data-caption="Minimalistic bathtub composition paired with a full-height window framing greenery."></div>
+          <div class="thumb"><img src="../img/project6/30.JPG" alt="Vanity detail with round mirror" data-caption="Vanity detail with a round mirror, clean detailing and soft ambient light."></div>
+          <div class="thumb"><img src="../img/project6/31.JPG" alt="Plants and decor arrangement" data-caption="Decor arrangement featuring plants and dark ceramic pieces, adding organic texture."></div>
+          <div class="thumb"><img src="../img/project6/32.JPG" alt="Freestanding bathtub and shelving" data-caption="Freestanding bathtub accentuated by glass shelving and serene natural finishes."></div>
+          <div class="thumb"><img src="../img/project6/33.JPG" alt="Bathroom with double vanity" data-caption="Bathroom featuring a double vanity setup with refined lighting and calm neutral tones."></div>
+        </div>
+
+        <!-- Main image + caption -->
+        <div class="gallery-main-col">
+          <div class="gallery-main">
+            <img id="main-image" src="" alt="Wabi-Sabi house">
+            <div class="gallery-main-label" id="main-label">01 · View</div>
+            <button class="gallery-main-fullscreen" type="button" id="fullscreen-btn">
+              <span class="icon">⤢</span>
+              <span>Fullscreen</span>
+            </button>
+          </div>
+          <div class="gallery-caption" id="main-caption"></div>
+        </div>
+      </section>
+
+      <!-- RIGHT: INFO -->
+      <aside class="info-panel">
+        <div>
+          <div class="info-meta-label">Residential · 2023</div>
+          <h1 class="info-title">Authentic townhouse</h1>
+          <p class="info-tagline">
+             Quiet, understated architecture shaped by natural materials, gentle light and lived-in comfort.
+          </p>
+        </div>
+
+        <div class="info-copy">
+          <p>
+            This townhouse is composed around calm timber surfaces, muted textures and soft, layered lighting. 
+            Spaces remain open and unforced, allowing natural materials, shadows and time itself to shape the atmosphere.
+          </p>
+          <p>
+            Depth and warmth are balanced with clarity of form, creating an interior that feels grounded, tactile 
+            and quietly imperfect—embracing character rather than polish.
+          </p>
+        </div>
+
+        <div class="info-data">
+          <div class="info-data-title">Project Details</div>
+          <div class="info-row">
+            <span class="info-label">Type</span>
+            <span class="info-value">Residential: Architecture & Interior Design</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Scope</span>
+            <span class="info-value">Layout · 3D · Joinery · Lighting · Materials</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Year</span>
+            <span class="info-value">2023</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Client</span>
+            <span class="info-value">Private</span>
+          </div>
+          <p class="info-note">
+            A refined study in form and function principles, celebrating natural materials, subtle textures and the beauty of open flow layout with the focus on nature around.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-hit-left"></div>
+  <div class="lightbox-hit-right"></div>
+
+  <div class="lightbox-inner">
+    <div class="lightbox-top">
+      <div class="lightbox-counter" id="lightbox-counter">1 / 1</div>
+    </div>
+
+    <span class="close" aria-label="Close">&times;</span>
+    <span class="arrow left" aria-label="Previous image">❮</span>
+    <span class="arrow right" aria-label="Next image">❯</span>
+
+    <div class="lightbox-img-wrap">
+      <img src="" alt="Fullscreen image" id="lightbox-img">
+    </div>
+
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+// GALLERY: main image + thumbs
+const mainImage   = document.getElementById('main-image');
+const mainCaption = document.getElementById('main-caption');
+const mainLabel   = document.getElementById('main-label');
+const thumbs      = Array.from(document.querySelectorAll('#thumb-grid .thumb'));
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+let currentIndex = 0;
+
+function setActiveImage(index){
+  const thumb = thumbs[index];
+  if(!thumb) return;
+  const img = thumb.querySelector('img');
+  if(!img) return;
+
+  mainImage.src = img.src;
+  mainImage.alt = img.alt || 'Project image';
+  const caption = img.dataset.caption || img.alt || '';
+  mainCaption.textContent = caption || '';
+  mainLabel.textContent = `${String(index + 1).padStart(2,'0')} · View`;
+
+  thumbs.forEach((t, i)=>{
+    t.classList.toggle('active', i === index);
+  });
+
+  currentIndex = index;
+}
+
+// Initialize
+if(thumbs.length){
+  setActiveImage(0);
+}
+
+// Thumb click
+thumbs.forEach((thumb, index)=>{
+  thumb.addEventListener('click', ()=>setActiveImage(index));
+});
+
+// LIGHTBOX
+const lightbox        = document.getElementById('lightbox');
+const lightboxImg     = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const closeBtn        = lightbox.querySelector('.close');
+const leftArrow       = lightbox.querySelector('.arrow.left');
+const rightArrow      = lightbox.querySelector('.arrow.right');
+const hitLeft         = lightbox.querySelector('.lightbox-hit-left');
+const hitRight        = lightbox.querySelector('.lightbox-hit-right');
+
+function updateLightbox(index){
+  const thumb = thumbs[index];
+  if(!thumb) return;
+  const img = thumb.querySelector('img');
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt || 'Fullscreen image';
+  const caption = img.dataset.caption || img.alt || '';
+  lightboxCaption.textContent = caption || '';
+  lightboxCounter.textContent = `${index + 1} / ${thumbs.length}`;
+  currentIndex = index;
+}
+
+function openLightbox(index){
+  updateLightbox(index);
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+// Open from main image or button
+mainImage.addEventListener('click', ()=>openLightbox(currentIndex));
+fullscreenBtn.addEventListener('click', ()=>openLightbox(currentIndex));
+
+/* Lightbox interactions */
+closeBtn.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', e=>{
+  if(e.target === lightbox) closeLightbox();
+});
+
+function showPrev(){
+  const nextIndex = (currentIndex - 1 + thumbs.length) % thumbs.length;
+  updateLightbox(nextIndex);
+  setActiveImage(nextIndex);
+}
+function showNext(){
+  const nextIndex = (currentIndex + 1) % thumbs.length;
+  updateLightbox(nextIndex);
+  setActiveImage(nextIndex);
+}
+
+leftArrow.addEventListener('click', showPrev);
+rightArrow.addEventListener('click', showNext);
+hitLeft.addEventListener('click', showPrev);
+hitRight.addEventListener('click', showNext);
+
+// Keyboard shortcuts
+window.addEventListener('keydown', e=>{
+  if(!lightbox.classList.contains('active')) return;
+  if(e.key === 'Escape')     closeLightbox();
+  if(e.key === 'ArrowLeft')  showPrev();
+  if(e.key === 'ArrowRight') showNext();
+});
+</script>
+
+</body>
+</html>
