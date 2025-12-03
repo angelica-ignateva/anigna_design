@@ -73,7 +73,6 @@
       display: none !important;
     }
 
-
     /* ============ INTRO ============ */
     .intro{
       position:relative;
@@ -1216,6 +1215,407 @@
       display: block;
     }
 
+    /* ============ MOBILE ADJUSTMENTS ============ */
+
+    /* ============ MOBILE & SMALL SCREEN ADJUSTMENTS ============ */
+
+    /* Slightly tighter sections on laptops/tablets */
+    @media (max-width: 1024px) {
+      .section-inner {
+        padding: 40px 20px;
+      }
+
+      .contact-card {
+        padding: 32px 22px 34px;
+      }
+
+      .separator {
+        width: 100%;
+        max-width: 640px;
+        margin: 70px auto;
+      }
+    }
+
+    /* Main mobile breakpoint – phones & small tablets */
+    @media (max-width: 768px) {
+      /* NAV: stack vertically on mobile */
+      nav{
+        flex-wrap:wrap;
+        gap:8px;
+        padding:12px 14px;
+      }
+      nav div{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        row-gap:6px;
+      }
+      nav a{
+        margin-left:0;
+        font-size:11px;
+      }
+
+      /* Increase scroll margin so anchors are not hidden behind taller nav */
+      section[id] {
+        scroll-margin-top: 90px;
+      }
+
+      /* Intro: give space under fixed nav on mobile */
+      .intro {
+        min-height: 100vh;
+        padding-top: 90px;
+      }
+
+      .intro-content {
+        padding: 40px 18px 56px;
+      }
+
+      .intro-content img {
+        width: min(320px, 78vw);
+      }
+
+      .intro-content .tagline {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+      }
+
+      .intro-content .quote {
+        font-size: 20px;
+        padding: 0 10px;
+      }
+
+      .intro-fade {
+        height: 80px;
+      }
+
+      /* Intro background images: cover full area on mobile */
+      .background-fade-gallery img {
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+      }
+
+      /* Sections */
+      .section-title {
+        font-size: 24px;
+        letter-spacing: 0.12em;
+      }
+
+      .section-sub {
+        font-size: 0.95em;
+        padding: 0 4px;
+      }
+
+      .panel .section-inner {
+        padding: 36px 18px;
+      }
+
+      .separator {
+        width: 100%;
+        margin: 56px auto;
+      }
+
+      /* Projects grid – ensure full width */
+      #projects.portfolio {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .portfolio-item {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+      }
+
+      .portfolio-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* On touch devices, always show overlay (hover is unreliable) */
+      .portfolio-item .overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .portfolio-item img {
+        transform: scale(1.04);
+        filter: brightness(0.4);
+      }
+
+      .overlay h3 {
+        font-size: 18px;
+      }
+
+      .overlay .meta {
+        font-size: 11px;
+      }
+
+      .more-projects-inner {
+        padding: 26px 18px 40px;
+      }
+
+      /* ABOUT */
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        justify-items: center;
+        text-align: center;
+        margin-top: 32px;
+      }
+
+      .about-photo {
+        width: 86%;
+        margin: 0 auto;
+      }
+
+      .about-photo img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .editorial-about {
+        max-width: 100%;
+        padding-right: 0;
+        text-align: left;
+        font-size: 0.97em;
+      }
+
+      .editorial-about p {
+        margin-bottom: 14px;
+      }
+
+      /* SERVICES / CARDS */
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .card {
+        padding: 20px 18px;
+      }
+
+      .card h3 {
+        font-size: 18px;
+      }
+
+      .card p {
+        font-size: 0.94em;
+      }
+
+      /* PROCESS SUMMARY CARDS (top row) */
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      /* PROCESS INTERACTIVE LAYOUT */
+      .process-layout {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        margin-top: 28px;
+      }
+
+      .process-headline {
+        font-size: 20px;
+      }
+
+      .process-copy {
+        font-size: 0.93em;
+        max-width: none;
+      }
+
+      .process-step-chips {
+        gap: 8px;
+      }
+
+      .process-step-chip {
+        padding: 8px 14px;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+      }
+
+      .process-detail-column {
+        padding: 20px 16px 22px;
+      }
+
+      .process-detail-title {
+        font-size: 18px;
+      }
+
+      .process-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .process-meta-block {
+        font-size: 0.86em;
+      }
+
+      /* FAQ */
+      .faq-list {
+        margin-top: 26px;
+      }
+
+      .faq-question span:first-child {
+        font-size: 0.95em;
+      }
+
+      .faq-answer {
+        font-size: 0.9em;
+      }
+
+      /* CONTACT */
+      .contact-card {
+        padding: 28px 18px 32px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .contact-intro h3 {
+        font-size: 22px;
+      }
+
+      .contact-intro p {
+        font-size: 0.95em;
+      }
+
+      .contact-details {
+        font-size: 0.9em;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .form-field,
+      .form-field-full {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .contact-form {
+        font-size: 0.94em;
+      }
+
+      .contact-checkbox {
+        font-size: 0.8em;
+      }
+
+      .cta {
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .contact-form-note {
+        font-size: 0.8em;
+        margin-top: 10px;
+      }
+
+      /* MODALS */
+      .modal-dialog {
+        width: 94vw;
+        max-height: 92vh;
+      }
+
+      .modal-header {
+        padding: 10px 14px 8px;
+      }
+
+      .modal-body {
+        padding: 12px 12px 16px;
+      }
+
+      .modal-embed-frame iframe {
+        height: 60vh;
+      }
+
+      .modal-video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-card {
+        padding: 10px 10px 12px;
+      }
+
+      .video-card p {
+        font-size: 0.9em;
+      }
+
+      /* LEGAL TEXT INSIDE MODAL */
+      .legal-text {
+        font-size: 0.88em;
+      }
+
+      .legal-text ul {
+        margin-left: 14px;
+      }
+
+      /* FOOTER */
+      .site-footer {
+        padding: 22px 18px 28px;
+      }
+
+      .site-footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .site-footer-links {
+        gap: 12px;
+      }
+
+      .social-links {
+        order: -1;
+      }
+
+      .social-links svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    /* Very small phones (e.g., old iPhones) */
+    @media (max-width: 480px) {
+      nav img.logo {
+        height: 28px;
+      }
+
+      nav a {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+      }
+
+      .intro-content .quote {
+        font-size: 18px;
+      }
+
+      .about-photo {
+        width: 92%;
+      }
+
+      .contact-card {
+        padding: 24px 14px 28px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+    }
 
   </style>
 </head>
@@ -1909,7 +2309,7 @@
                 </select>
               </div>
               <div class="form-field">
-                <label for="contact-budget">Approx. designed area</label>
+                <label for="contact-budget">Approx. area</label>
                 <select id="contact-budget" name="budget">
                   <option value="">Select...</option>
                   <option>Under 100 sq.m.</option>
@@ -2253,14 +2653,14 @@
           </svg>
         </a>
 
-        <a href="https://www.facebook.com/people/only_oneinteriors/100089218965075/?mibextid=LQQJ4d" target="_blank" aria-label="Facebook">
+        <a href="https://www.facebook.com/anignadesign/" target="_blank" aria-label="Facebook">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v3H7v4h3v7h4v-7h3l1-4h-4V8c0-.6.4-1 1-1z"
                   fill="currentColor"/>
           </svg>
         </a>
 
-        <a href="https://www.tiktok.com/@only_one.interiors" target="_blank" aria-label="TikTok">
+        <a href="https://www.tiktok.com/@anigna_design" target="_blank" aria-label="TikTok">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M20 7.5c-2 0-3.7-1.6-3.9-3.6h-3.1v11.3c0 1.7-1.4 3.1-3.1 3.1S6.9 16.9 6.9 15.2c0-1.7 
                     1.4-3.1 3.1-3.1.3 0 .7.1 1 .2V9.1c-.3 0-.7-.1-1-.1-3.4 0-6.2 2.8-6.2 6.2S6.6 21.4 10 21.4 
